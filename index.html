@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Undangan Walimatus Safar</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
+
+      body {
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      .judul {
+        font-family: "Great Vibes", cursive;
+      }
+
+      .bg-overlay {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+          url("img/galeri/kabah.jpg");
+        background-size: cover;
+        background-position: center;
+      }
+
+      .cover-bg {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+          url("img/galeri/cover.jpg");
+        background-size: cover;
+        background-position: center;
+        animation: fadeIn 2s ease-in-out;
+      }
+
+      .pulse {
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 1s ease-out, transform 1s ease-out;
+      }
+
+      .fade-in.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .bunga {
+        position: fixed;
+        top: -50px;
+        width: 40px;
+        height: 40px;
+        background-image: url("img/bunga1.png");
+        background-size: cover;
+        animation: jatuh 10s linear infinite;
+        z-index: 10;
+        pointer-events: none;
+      }
+
+      @keyframes jatuh {
+        to {
+          transform: translateY(110vh) rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+
+  <body class="text-white bg-overlay min-h-screen">
+    <!-- Bunga jatuh -->
+    <div class="bunga" style="left: 10%; animation-delay: 0s"></div>
+    <div class="bunga" style="left: 30%; animation-delay: 2s"></div>
+    <div class="bunga" style="left: 50%; animation-delay: 4s"></div>
+    <div class="bunga" style="left: 70%; animation-delay: 6s"></div>
+    <div class="bunga" style="left: 90%; animation-delay: 8s"></div>
+
+    <!-- COVER -->
+    <div
+      id="cover"
+      class="fixed inset-0 flex flex-col items-center justify-center cover-bg text-white z-50 text-center p-8"
+    >
+      <div class="mb-6">
+        <div class="flex justify-center space-x-6">
+          <div
+            class="w-32 h-32 rounded-full border-4 border-yellow-300 overflow-hidden"
+          >
+            <img
+              src="img/foto1.jpg"
+              alt="Foto 1"
+              class="object-cover w-full h-full"
+            />
+          </div>
+          <div
+            class="w-32 h-32 rounded-full border-4 border-yellow-300 overflow-hidden"
+          >
+            <img
+              src="img/foto2.jpg"
+              alt="Foto 2"
+              class="object-cover w-full h-full"
+            />
+          </div>
+        </div>
+      </div>
+
+      <h1 class="text-5xl judul text-yellow-400 mb-4">Walimatus Safar</h1>
+      <p class="mb-2 text-lg italic">Kahatur, Bapa/Ibu/Saderek</p>
+      <div class="mb-6">
+        <span class="block text-lg text-gray-200 mb-1">
+          Acara Ingsa Alloh dikawitan dina:
+        </span>
+        <div id="countdown" class="text-2xl font-bold text-yellow-300"></div>
+      </div>
+      <button
+        onclick="bukaUndangan()"
+        class="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-3 px-6 rounded-full transition pulse"
+      >
+        Buka Undangan
+      </button>
+    </div>
+
+    <!-- ISI UNDANGAN -->
+    <div id="undangan" style="display: none">
+      <!-- Musik Latar -->
+      <audio id="bgm" loop>
+        <source src="musik/laguHaji.mp3" type="audio/mpeg" />
+      </audio>
+
+      <!-- Sambutan -->
+      <section class="text-center py-30 px-12 bg-black bg-opacity-60 fade-in">
+        <h1 class="text-4xl judul text-yellow-400 mb-2">Walimatus Safar</h1>
+        <div class="bismillah text-yellow-400 mb-2">
+          بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
+        </div>
+        <div class="text-yellow-300 text-xl mb-4">
+          ٱلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ ٱللّٰهِ وَبَرَكَاتُهُ
+        </div>
+        <p class="italic text-gray-300">
+          Salam silaturahim kairing du'a mugi Bapa/ibu/ Saderek aya dina
+          panangtayungan Gusti<br />
+          Kalayan miharep rido Alloh SWT, sim kuring, pun bojo gaduh maksad<br />
+          Tasyakur Walimatus Safar, wirehing seja ngalaksanakeun rukun Islam anu
+          ka lima
+        </p>
+        <p class="italic text-gray-300 mt-4">
+          Pencermah insya Allah bade di dugikeun:
+        </p>
+        <p class="text-yellow-300 font-semibold">KH.E.Z Muttaqien</p>
+      </section>
+
+      <!-- Jadwal Acara -->
+      <section
+        class="max-w-xl mx-auto bg-black bg-opacity-60 p-6 mt-8 rounded-lg fade-in"
+      >
+        <p class="text-center italic text-gray-300 font-semibold">
+          Dupi Tempat Sareng Waktosna Ingsya Allah Dina:
+        </p>
+        <div class="space-y-2 text-base mt-4">
+          <div>
+            <span class="inline-block w-36 font-semibold">Tanggal</span>: Kamis,
+            17 April 2025
+          </div>
+          <div>
+            <span class="inline-block w-36 font-semibold">Waktu</span>: 09.00
+            WIB
+          </div>
+          <div>
+            <span class="inline-block w-36 font-semibold">Tempat</span>: Masjid
+            Jami Al Fatah, Kp. Babakan Panembong, Karangpawitan, Garut
+          </div>
+        </div>
+      </section>
+
+      <!-- Konfirmasi Kehadiran -->
+      <section class="text-center mt-8 px-4 fade-in">
+        <a
+          href="https://wa.me/6285221977070?text=Assalamu%27alaikum%2C+saya+akan+hadir+di+acara+Walimatus+Safar"
+          target="_blank"
+          class="inline-block bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-4 rounded-full transition"
+        >
+          Konfirmasi Kehadiran
+        </a>
+      </section>
+
+      <!-- Doa Penutup -->
+      <section
+        class="max-w-2xl mx-auto mt-10 bg-black bg-opacity-60 p-6 rounded-lg text-center fade-in"
+      >
+        <p class="italic text-gray-300">
+          Ngaraos bingah nu taya papadana saupami Bapa, Ibu, miwah sadérék
+          sadaya tiasa sumping rurumpaheun dina waktosna ngadeudeul du'a ka sim
+          kuring/ pun bojo supados aya dina kalancaran, kasehatan, kakiatan,
+          sareng janten haji anu mabrur/mabruroh.
+        </p>
+        <p class="italic text-gray-300">
+          Kana kaweningan galih salira, langkung ti payun timpah hatur réwu
+          nuhun.<br />
+          <span class="text-yellow-300">
+            وَٱلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ ٱللّٰهِ وَبَرَكَاتُهُ
+          </span>
+        </p>
+      </section>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+      function bukaUndangan() {
+        document.getElementById("cover").style.display = "none";
+        document.getElementById("undangan").style.display = "block";
+        const audio = document.getElementById("bgm");
+        if (audio) {
+          audio.play().catch((e) => console.log("Audio play blocked: ", e));
+        }
+      }
+
+      const targetDate = new Date("2025-04-17T09:00:00").getTime();
+      const countdownEl = document.getElementById("countdown");
+
+      setInterval(() => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance <= 0) {
+          countdownEl.innerHTML = "Acara sedang berlangsung!";
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        countdownEl.innerHTML = `${days}h ${hours}j ${minutes}m ${seconds}d`;
+      }, 1000);
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+        });
+      });
+
+      document
+        .querySelectorAll(".fade-in")
+        .forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>
